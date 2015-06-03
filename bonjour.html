@@ -14,7 +14,7 @@
 <script>
     var canvas = document.getElementById("myCanvas");
     var scale = 300;
-    var O = { x: canvas.getAttribute("width") / 2, y: canvas.getAttribute("height") /2 };
+    var O = { x: 170+ canvas.getAttribute("width") / 2, y: canvas.getAttribute("height") /2 };
 
     var draw = function(x, y, color) {
         var ctx = canvas.getContext("2d");
@@ -43,9 +43,9 @@
 
     for (var y=-2; y<=2; y += 1/scale) {
 
-        for (var x=-2; x<=2; x += 1/scale) {
+        for (var x=-2; x<=1; x += 1/scale) {
             var z = { x:x, y:y };
-            for (var n=1; n<=35; n += 1) {
+            for (var n=1; n<=50; n += 1) {
                 z = square(z);
                 z.x += x;
                 z.y += y;
