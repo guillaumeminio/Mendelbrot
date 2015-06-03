@@ -13,7 +13,7 @@
 
 <script>
     var canvas = document.getElementById("myCanvas");
-    var scale = 300;
+    var scale = 200;
     var O = { x: 170+ canvas.getAttribute("width") / 2, y: canvas.getAttribute("height") /2 };
 
     var draw = function(x, y, color) {
@@ -41,20 +41,20 @@
     var green = { r:0, g:255, b:0, a:255 };
     var black = { r:0, g:0, b:0, a:255 };
 
-    for (var y=-1; y<=1; y += 1/scale) {
+    for (var y=-2; y<=2; y += 1/scale) {
 
-        for (var x=-2; x<=1; x += 1/scale) {
+        for (var x=-2; x<=2; x += 1/scale) {
             var z = { x:x, y:y };
 
             var n = 1;
-            while (stillIn(z) && n <= 20) {
+            while (stillIn(z) && n <= 30) {
                 z = square(z);
                 z.x += x;
                 z.y += y;
                 n += 1;
             }
             if (stillIn(z)) {
-                drawPoint(x, y, black);
+                drawPoint(x, y, black );
             }
             else {
                 drawPoint(x, y, { r:20*n, g:0, b:0, a:255 });
