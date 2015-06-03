@@ -12,10 +12,12 @@
 </canvas>
 
 <script>
-    var draw = function(x, y, color)
-    {
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
+    var canvas = document.getElementById("myCanvas");
+    var scale = 150;
+    var O = { x: canvas.getAttribute("width") / 2, y: canvas.getAttribute("height") /2 };
+
+    var draw = function(x, y, color) {
+        var ctx = canvas.getContext("2d");
         var imgData = ctx.createImageData(1, 1);
 
         imgData.data[0] = color.r;
@@ -24,15 +26,32 @@
         imgData.data[3] = color.a;
         ctx.putImageData(imgData, x, y);
     };
+    var drawPoint = function(x, y, color) {
+        draw(O.x+scale*x, O.y-scale*y, color);
+    };
+    var square = function(z) {
+        return { x: z.x * z.x - z.y * z.y, y: 2 * z.x * z.y };
+    };
 
     var red = { r:255, g:0, b:0, a:255 };
     var blue = { r:0, g:0, b:255, a:255 };
     var green = { r:0, g:255, b:0, a:255 };
+    var black = { r:0, g:0, b:0, a:255 };
 
-    draw(50, 200, red);
-    draw(100, 50, blue);
-    draw(75,150, green);
+    for (var y=-2; y<=2; y += 1/scale) {
 
+        for (var x=-2; x<=2; x += 1/scale) {
+            var z = { x:x, y:y };
+            for (var n=1; n<=10; n += 1) {
+                z = square(z);
+            }
+            if (z.x < 2 && z.y < 2) {
+                drawPoint(x, y, black);
+            }
+        }
+    }
+
+    console.log("fini");
 </script>
 
 </body>
